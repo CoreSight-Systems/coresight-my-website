@@ -1,0 +1,14 @@
+:root{--bg:#111214;--bg2:#15161a;--panel:#18191d;--panel2:#1c1d22;--line:#2a2c31;--line2:#36383f;--violet-rgb:124,58,237;--ember-rgb:245,158,11}
+body{background:var(--bg);position:relative}
+html::after{content:"";position:fixed;inset:0;z-index:100;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.9;mix-blend-mode:overlay}
+.stack{background-color:rgba(21,22,26,.78);background-image:none}
+.env{background:transparent}
+.hero::before{background:radial-gradient(closest-side,rgba(31,139,255,.12),transparent)}
+/* E · Contours — overlapping off-center ripples, like a topographic survey; two ring sets carry violet and ember */
+body::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:
+repeating-radial-gradient(circle at 88% 4%,transparent 0 46px,rgba(90,169,255,.13) 46px 47px),
+repeating-radial-gradient(circle at 8% 40%,transparent 0 58px,rgba(var(--violet-rgb),.2) 58px 59px),
+repeating-radial-gradient(circle at 76% 78%,transparent 0 52px,rgba(var(--ember-rgb),.13) 52px 53px);
+-webkit-mask-image:radial-gradient(40.8% 21.6% at 88% 4%,#000,transparent),radial-gradient(36% 19.2% at 8% 40%,#000,transparent),radial-gradient(36% 16.8% at 76% 78%,#000,transparent);
+mask-image:radial-gradient(40.8% 21.6% at 88% 4%,#000,transparent),radial-gradient(36% 19.2% at 8% 40%,#000,transparent),radial-gradient(36% 16.8% at 76% 78%,#000,transparent);-webkit-mask-composite:source-over;mask-composite:add}
+body::after{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(48% 24% at 88% 4%,rgba(31,139,255,.11),transparent 70%),radial-gradient(36% 19.2% at 8% 40%,rgba(var(--violet-rgb),.09),transparent 70%),radial-gradient(36% 16.8% at 76% 78%,rgba(var(--ember-rgb),.06),transparent 70%)}
