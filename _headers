@@ -3,3 +3,12 @@
 
 /
   Cache-Control: no-cache, must-revalidate
+
+/assets/*
+  Cache-Control: public, max-age=604800
+
+/*.css
+  Cache-Control: public, max-age=3600
+
+/embed.js
+  Cache-Control: public, max-age=3600
