@@ -1,7 +1,7 @@
 /* embed.js — product videos (assets/video/*.mp4) inside website pages.
    Only the most-visible slot (>=55% in view) plays, so one video plays at a time. A slot
    restarts from 0 each time it becomes the active one and pauses when it stops being it.
-   Clicking a slot restarts it. The .vposter overlay (play button + label) hides while a
+   Autoplay starts once the page has loaded and gone idle. Clicking a slot restarts it. The .vposter overlay (play button + label) hides while a
    video is playing. With prefers-reduced-motion nothing autoplays: the poster and play
    button show until the visitor clicks. */
 (function () {
@@ -39,11 +39,19 @@
       });
     });
     if (!('IntersectionObserver' in window)) return;
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { ratios.set(e.target, e.intersectionRatio); });
-      pick();
-    }, { threshold: [0, 0.25, 0.4, 0.55, 0.7, 0.85, 1] });
-    slots.forEach(function (s) { io.observe(s); });
+    // Autoplay waits until the page has loaded and the main thread is idle, so decoding
+    // video never competes with first paint. Clicking a slot still plays immediately.
+    afterLoad(function () {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { ratios.set(e.target, e.intersectionRatio); });
+        pick();
+      }, { threshold: [0, 0.25, 0.4, 0.55, 0.7, 0.85, 1] });
+      slots.forEach(function (s) { io.observe(s); });
+    });
+  }
+  function afterLoad(fn) {
+    function idle() { if (window.requestIdleCallback) window.requestIdleCallback(fn, { timeout: 4000 }); else setTimeout(fn, 2000); }
+    if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
