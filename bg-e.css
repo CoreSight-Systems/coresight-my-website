@@ -4,11 +4,19 @@ html::after{content:"";position:fixed;inset:0;z-index:100;pointer-events:none;ba
 .stack{background-color:rgba(21,22,26,.78);background-image:none}
 .env{background:transparent}
 .hero::before{background:radial-gradient(closest-side,rgba(31,139,255,.12),transparent)}
-/* E · Contours — overlapping off-center ripples, like a topographic survey; two ring sets carry violet and ember */
-body::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:
-repeating-radial-gradient(circle at 88% 4%,transparent 0 46px,rgba(90,169,255,.13) 46px 47px),
-repeating-radial-gradient(circle at 8% 40%,transparent 0 58px,rgba(var(--violet-rgb),.2) 58px 59px),
-repeating-radial-gradient(circle at 76% 78%,transparent 0 52px,rgba(var(--ember-rgb),.13) 52px 53px);
--webkit-mask-image:radial-gradient(40.8% 21.6% at 88% 4%,#000,transparent),radial-gradient(36% 19.2% at 8% 40%,#000,transparent),radial-gradient(36% 16.8% at 76% 78%,#000,transparent);
-mask-image:radial-gradient(40.8% 21.6% at 88% 4%,#000,transparent),radial-gradient(36% 19.2% at 8% 40%,#000,transparent),radial-gradient(36% 16.8% at 76% 78%,#000,transparent);-webkit-mask-composite:source-over;mask-composite:add}
-body::after{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(48% 24% at 88% 4%,rgba(31,139,255,.11),transparent 70%),radial-gradient(36% 19.2% at 8% 40%,rgba(var(--violet-rgb),.09),transparent 70%),radial-gradient(36% 16.8% at 76% 78%,rgba(var(--ember-rgb),.06),transparent 70%)}
+/* E · Contours — overlapping off-center ripples, like a topographic survey; two ring sets carry violet and ember.
+   Each visible patch is its own element sized to its mask ellipse; every ripple set is drawn in every patch, so the overlap lines match the original single page-sized layer. */
+.contours{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.contours i{position:absolute;display:block}
+.contours .g1{left:54.4%;top:0%;width:45.6%;height:20.8%;background:radial-gradient(105.2632% 115.3846% at 73.6842% 19.2308%,rgba(31,139,255,.11),transparent 70%)}
+.contours .g2{left:0%;top:26.56%;width:33.2%;height:26.88%;background:radial-gradient(108.4337% 71.4286% at 24.0964% 50%,rgba(var(--violet-rgb),.09),transparent 70%)}
+.contours .g3{left:50.8%;top:66.24%;width:49.2%;height:23.52%;background:radial-gradient(73.1707% 71.4286% at 51.2195% 50%,rgba(var(--ember-rgb),.06),transparent 70%)}
+.contours .r1{left:47.2%;top:0%;width:52.8%;height:25.6%;background:repeating-radial-gradient(circle at 77.2727% 15.625%,transparent 0 46px,rgba(90,169,255,.13) 46px 47px),
+repeating-radial-gradient(circle at -74.2424% 156.25%,transparent 0 58px,rgba(var(--violet-rgb),.2) 58px 59px),
+repeating-radial-gradient(circle at 54.5455% 304.6875%,transparent 0 52px,rgba(var(--ember-rgb),.13) 52px 53px);-webkit-mask-image:radial-gradient(77.2727% 84.375% at 77.2727% 15.625%,#000,transparent);mask-image:radial-gradient(77.2727% 84.375% at 77.2727% 15.625%,#000,transparent)}
+.contours .r2{left:0%;top:20.8%;width:44%;height:38.4%;background:repeating-radial-gradient(circle at 200% -43.75%,transparent 0 46px,rgba(90,169,255,.13) 46px 47px),
+repeating-radial-gradient(circle at 18.1818% 50%,transparent 0 58px,rgba(var(--violet-rgb),.2) 58px 59px),
+repeating-radial-gradient(circle at 172.7273% 148.9583%,transparent 0 52px,rgba(var(--ember-rgb),.13) 52px 53px);-webkit-mask-image:radial-gradient(81.8182% 50% at 18.1818% 50%,#000,transparent);mask-image:radial-gradient(81.8182% 50% at 18.1818% 50%,#000,transparent)}
+.contours .r3{left:40%;top:61.2%;width:60%;height:33.6%;background:repeating-radial-gradient(circle at 80% -170.2381%,transparent 0 46px,rgba(90,169,255,.13) 46px 47px),
+repeating-radial-gradient(circle at -53.3333% -63.0952%,transparent 0 58px,rgba(var(--violet-rgb),.2) 58px 59px),
+repeating-radial-gradient(circle at 60% 50%,transparent 0 52px,rgba(var(--ember-rgb),.13) 52px 53px);-webkit-mask-image:radial-gradient(60% 50% at 60% 50%,#000,transparent);mask-image:radial-gradient(60% 50% at 60% 50%,#000,transparent)}
